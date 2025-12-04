@@ -30,6 +30,15 @@ public class Client {
 
     public void diminuerPatience(int minutes) {
         // TODO: diminuer patience et passer à PARTI_FACHE si <= 0
+
+        if(minutes < 0) System.out.println("impossible de diminuer la patience avec un temps négatif.");
+
+        else if ((patience -= minutes) <= 0){
+            setEtat(EtatClient.PARTI_FACHE);
+
+            patience = 0;
+        }
+
     }
 
     public EtatClient getEtat() {
