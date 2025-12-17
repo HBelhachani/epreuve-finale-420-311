@@ -1,6 +1,9 @@
 package mv.sdd.model;
 
+import mv.sdd.utils.Constantes;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Commande {
@@ -10,14 +13,19 @@ public class Commande {
     private EtatCommande etat = EtatCommande.EN_ATTENTE;
     private int tempsRestant; // en minutes simulées
     // TODO : ajouter l'attribut plats et son getter avec le bon type et le choix de la SdD adéquat
-    private final List<Plat> plats = new ArrayList<>();
+    private final HashMap<MenuPlat, Plat> plats = new HashMap<>();
 
     // TODO : Ajout du ou des constructeur(s) nécessaires ou compléter au besoin
     public Commande(Client client, MenuPlat plat) {
         id = ++nbCmd;
         this.client = client;
-        // À compléter
 
+        ajouterPlat(plat);
+
+    }
+
+    public HashMap<MenuPlat, Plat> getPlats() {
+        return plats;
     }
 
     public int getId() {
@@ -40,15 +48,22 @@ public class Commande {
         this.etat = etat;
     }
 
-    // TODO : Ajoutez la méthode ajouterPlat
-    public void ajouterPlat(Plat plat){
-        if(plat != null){
 
-            this.plats.add(plat);
+    // TODO : Ajoutez la méthode ajouterPlat
+    public void ajouterPlat(MenuPlat menuPlat){
+        if(menuPlat != null){
+
+            Plat plat = Constantes.MENU.get(menuPlat);
+
+            this.plats.put(menuPlat, plat);
         }
     }
 
     // TODO : Ajoutez la méthode demarrerPreparation
+
+    public void demarrerPreparation(){
+        setEtat(EtatCommande.EN_PREPARATION);
+    }
 
     // TODO : Ajoutez la méthode decrementerTempsRestant
 
@@ -69,5 +84,26 @@ public class Commande {
 
     // TODO : Ajoutez la méthode calculerTempsPreparationTotal
 
+    public int calculerTempsPreparationTotal(){
+
+        int sum = 0;
+
+        for(Plat p : plats.values()){
+            sum += p.getTempsPreparation();
+        }
+
+        return sum;
+    }
+
     // TODO : Ajoutez la méthode calculerMontant
+
+    public double calculerMontant(){
+        double sum = 0;
+
+        for(Plat p : plats.values()){
+            sum += p.getPrix();
+        }
+
+        return sum;
+    }
 }

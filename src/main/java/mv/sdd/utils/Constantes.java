@@ -11,7 +11,7 @@ public class Constantes {
 
     // ========= Emojis généraux =========
     private static final String EMO_CLIENTS      = "👥";
-    private static final String EMO_FILE_CMD     = "📥";
+    public static final String EMO_FILE_CMD     = "📥";
     private static final String EMO_PREP         = "🍳";
     private static final String EMO_STATS        = "📊";
     private static final String EMO_RESTO        = "🍽️";

@@ -19,7 +19,7 @@ public class ActionFileReader {
 
             while ((line = reader.readLine()) != null){
 
-                if(!line.isEmpty() && line.trim().startsWith("#"))
+                if(!line.isEmpty() && !line.trim().startsWith("#"))
                     actions.add(ActionParser.parseLigne(line));
             }
 
